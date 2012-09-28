@@ -19,7 +19,7 @@
 		      	<div class="control-group">
 		        	<label class="control-label" for="input01">Fullname</label>
 		        	<div class="controls">
-		          		<input type="text" class="input-xlarge" id="input01" required>
+		          		<input type="text" class="input-xlarge" id="input01" required placeHolder="John Doe">
 		        	</div>
 		      	</div>
 	      	</fieldset>
@@ -27,7 +27,23 @@
 		      	<div class="control-group">
 		        	<label class="control-label" for="input02">Username</label>
 		        	<div class="controls">
-		          		<input type="text" class="input-xlarge" id="input02" required>
+		          		<input type="text" class="input-xlarge" id="input02" required placeHolder="jdoe">
+		        	</div>
+		      	</div>
+	      	</fieldset>
+	      	<fieldset>
+		      	<div class="control-group">
+		        	<label class="control-label" for="input03">Email</label>
+		        	<div class="controls">
+		          		<input type="email" class="input-xlarge" id="input03" required placeHolder="john.doe@gmail.com">
+		        	</div>
+		      	</div>
+	      	</fieldset>
+	      	<fieldset>
+		      	<div class="control-group">
+		        	<label class="control-label" for="input04">Password</label>
+		        	<div class="controls">
+		          		<input type="password" class="input-xlarge" id="input04" required placeHolder="">
 		        	</div>
 		      	</div>
 	      	</fieldset>
@@ -42,4 +58,25 @@
 </body>
 
 <script type='text/javascript' src=''></script>
+<script type="text/javascript">
+
+  // ref: http://diveintohtml5.org/detect.html
+  function supports_input_placeholder()
+  {
+    var i = document.createElement('input');
+    return 'placeholder' in i;
+  }
+
+  if(!supports_input_placeholder()) {
+    var fields = document.getElementsByTagName('INPUT');
+    for(var i=0; i < fields.length; i++) {
+      if(fields[i].hasAttribute('placeholder')) {
+        fields[i].defaultValue = fields[i].getAttribute('placeholder');
+        fields[i].onfocus = function() { if(this.value == this.defaultValue) this.value = ''; }
+        fields[i].onblur = function() { if(this.value == '') this.value = this.defaultValue; }
+      }
+    }
+  }
+
+</script>
 </html>
