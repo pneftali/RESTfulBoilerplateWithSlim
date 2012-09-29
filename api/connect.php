@@ -1,7 +1,8 @@
 <?php
 	
-	$ini = parse_ini_file('config.ini');
+	
 
+	/*
 	$mysqli = new mysqli(
 		$ini['host'],
 		$ini['user'],
@@ -15,4 +16,17 @@
 	} else{
 		echo 'grats!';
 	}
+	*/
+
+	function getConn(){
+		$ini = parse_ini_file('config.ini');
+		try {
+		    $db = new PDO("mysql:host=$ini[host];dbname=$ini[db]", $ini['user'], $ini['pass']);	
+		    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);	    
+		    return $db;
+		} catch(PDOException $e) {
+		    echo 'ERROR: ' . $e->getMessage();
+		}	
+	}
+	
 ?>

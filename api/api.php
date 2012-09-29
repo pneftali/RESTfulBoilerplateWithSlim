@@ -7,9 +7,25 @@
 	$app = new \Slim\Slim();
 
 
-	$app->get('/:name', function ($name) {
-	    echo "Hello, $name";
+	$app->get('/list', function (){
+
+		try {
+			$db = getConn();
+			$stmt = $db->prepare("SELECT * FROM users ORDER BY name");  
+			$stmt->execute();
+			$list = $stmt->fetchAll(PDO::FETCH_OBJ);
+			//$db = null;
+			echo '{"data": ' . json_encode($list) . '}';
+			//echo json_encode($wines);
+		} catch(PDOException $e) {
+			echo '{"error":{"text":'. $e->getMessage() .'}}'; 
+		}
+		
 	});
+
+	
+
+
 
 	$app->run();
 
