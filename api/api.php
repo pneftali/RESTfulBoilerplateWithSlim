@@ -16,7 +16,6 @@
 			$list = $stmt->fetchAll(PDO::FETCH_OBJ);
 			//$db = null;
 			echo '{"data": ' . json_encode($list) . '}';
-			//echo json_encode($wines);
 		} catch(PDOException $e) {
 			echo '{"error":{"text":'. $e->getMessage() .'}}'; 
 		}
